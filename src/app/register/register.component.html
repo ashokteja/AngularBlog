@@ -1,11 +1,11 @@
-<form [formGroup]="angForm" novalidate>
+<form [formGroup]="signupForm" novalidate (submit)="signUp(signupForm)">
 
 <div class="container register">
     <div class="row">
         <div class="col-md-3 register-left">
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
             <h3>Welcome</h3>
-            <p>To Create blog and post the articles</p>
+            <p>To Create blog and post the articles</p>{{submitted}}
             <input type="submit" name="" value="Login"/><br/>
         </div>
         <div class="col-md-9 register-right">
@@ -25,26 +25,26 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text"  name="firstName" class="form-control" placeholder="First Name *" 
-                                 required formControlName="firstName"  />
+                                 required formControlName="firstName"  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"   />
                             </div>
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control" placeholder="Your Email *"   
-                                #email ="ngModel" [(ngModel)]="user.email"  />
+                                formControlName="email"  required  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                             </div>
                             
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" placeholder="Password *" 
-                                #password ="ngModel" [(ngModel)]="user.password"  />
+                                 formControlName="password"  required [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Last Name *" 
-                                #lastName ="ngModel" [(ngModel)]="user.lastName"  />
+                                formControlName="lastName"  required [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"  />
                             </div>
                             <div class="form-group">
                                 <input type="text" minlength="10" maxlength="10" name="phone" class="form-control"
-                                 placeholder="Your Phone *"  #phone ="ngModel" [(ngModel)]="user.phone"  />
+                                 placeholder="Your Phone *" formControlName="phone"  required  [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"  />
                             </div>
                             <div class="form-group">
                             <input type="submit" class="btnRegister"  value="Register"/>

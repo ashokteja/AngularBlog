@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import {User} from '../shared/user.model';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { FormGroup,  FormBuilder,  Validators, FormControl } from '@angular/forms';
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -10,8 +10,11 @@ import { UserService } from '../shared/user.service';
 })
 export class RegisterComponent implements OnInit {
 
- user:User;
- angForm: FormGroup;
+ private user:User;
+ public submitted = false;
+
+
+ signupForm: FormGroup;
   constructor(private fb: FormBuilder) { 
 
   }
@@ -21,16 +24,27 @@ export class RegisterComponent implements OnInit {
   }
 
   resetForm(){
-
-    this.angForm = this.fb.group({
-      firstName: ['', Validators.required ],
-      lastName: ['', Validators.required ],
-      email: ['', Validators.required ],
-      password: ['', Validators.required ],
-      phone: ['', Validators.required ],
+    this.signupForm = new FormGroup({
+      firstName:  new FormControl('', Validators.required),
+      lastName:new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required,Validators.email]),
+      password: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
     });
-     
   }
+
+  get f() { return this.signupForm.controls; }
+
+  signUp(signupForm){
+    this.submitted = true;
+    if(signupForm.valid){
+      
+    }
+    this.user = signupForm;
+    console.log(signupForm);
+  }
+
+
 
  
 

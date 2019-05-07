@@ -93,3 +93,7 @@
     margin-bottom: -15%;
     color: #495057;
 }
+
+.ng-invalid.ng-touched {
+    border-color: red;
+}
